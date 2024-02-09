@@ -1,5 +1,4 @@
 
-import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Movies from './movies';
 import Panier from './panier';

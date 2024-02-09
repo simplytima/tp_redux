@@ -22,6 +22,7 @@ function Movies() {
     if (response.data.Search) {
       setMovies(response.data.Search);
     }
+    console.log(response)
    
   };
 
@@ -31,7 +32,7 @@ function Movies() {
   const Dispatch = useDispatch()
 
   const ajouter = (movie)=>{
-    Dispatch({type:"ajouter", payload:movie})
+    Dispatch({type:"ajouter", payload:{...movie, quantity:1}})
   }
 
 
@@ -76,10 +77,16 @@ function Movies() {
             <div className="img">
               <img src={movie.Poster} alt="" />
             </div>
-            <p>{movie.Title}</p>
-            <p>Type: {movie.Type}</p>
-            <p>Year: {movie.Year}</p>
-            <button onClick={()=>{ajouter(movie)}}>ajouter</button>
+
+            <div className="info">
+              <p>{movie.Title}</p>
+              <p>Type: {movie.Type}</p>
+              <p>Year: {movie.Year}</p>
+            </div>
+
+            <div className="btn">
+              <button onClick={()=>{ajouter(movie)}}>ajouter</button>
+            </div>
           </div>
         ))}
       </div>

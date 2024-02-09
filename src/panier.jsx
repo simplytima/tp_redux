@@ -1,6 +1,8 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 function Panier(){
+
 
     const paniers = useSelector((state)=>state.paniers)
 
@@ -11,6 +13,13 @@ function Panier(){
         Dispatch({type:"delete", payload:panier})
     }
 
+    const decrement=(id)=>{
+        Dispatch({type:'decrement' , payload:id})
+    }
+
+    const increment=(id)=>{
+        Dispatch({type:'increment' , payload:id})
+    }
 
 
 
@@ -19,11 +28,27 @@ function Panier(){
             {
                 paniers.map(panier=>{
                     return <div className="card">
-                        <img src={panier.Proster} alt="" />
-                        <p>{panier.Title}</p>
-                        <p>{panier.Type}</p>
-                        <p>{panier.Year}</p>
-                        <button onClick={()=>{Remove(panier)}}>delete</button>
+
+                        <div className="img">
+                          <img src={panier.Poster} alt="" />  
+                        </div>
+                        
+                        <div className="info">
+                            <p>{panier.Title}</p>
+                            <p>Type: {panier.Type}</p>
+                            <p>Year: {panier.Year}</p>
+                        </div>
+
+                        <div className="quantity">
+                            <button onClick={()=>{decrement(panier.imdbID)}}>-</button>
+                            <p>{panier.quantity}</p> 
+                            <button onClick={()=>{increment(panier.imdbID)}}>+</button>
+                        </div>
+                        
+                        <div className="btn">
+                          <button onClick={()=>{Remove(panier)}}>delete</button>  
+                        </div>
+                        
                     </div>
                 })
             }
